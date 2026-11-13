@@ -1,0 +1,20 @@
+# Web-Framework
+flask==3.1.3
+# Rate-Limiting (Schutz gegen Brute-Force beim Login)
+flask-limiter==4.1.1
+# CSRF-Schutz
+flask-wtf==1.3.0
+# CORS (welche Frontend-Domains dürfen zugreifen)
+flask-cors==6.0.5
+# Passwort-Hashing mit Argon2
+argon2-cffi==25.1.0
+# PostgreSQL-Treiber (ohne ORM, wir schreiben SQL selbst)
+psycopg[binary]==3.3.9
+# Redis-Client (gemeinsamer Speicher fürs Rate-Limiting bei mehreren Instanzen)
+redis==8.1.0
+# Produktions-Webserver (läuft nur unter Linux/Docker, nicht unter Windows)
+gunicorn==27.0.1
+# Liest die .env-Datei ein
+python-dotenv==1.2.4
+# Tests
+pytest==9.2.0
