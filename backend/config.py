@@ -60,8 +60,22 @@ class Config:
     LOGIN_RATE_LIMIT = os.environ.get("LOGIN_RATE_LIMIT", "5 per minute;20 per hour")
     REGISTER_RATE_LIMIT = os.environ.get("REGISTER_RATE_LIMIT", "10 per hour")
 
-    # Läuft die App hinter nginx? Dann steht die echte Client-IP im Header X-Forwarded-For.
+    # Läuft die App hinter einem Proxy (nginx)? Dann steht die echte Client-IP im
+    # Header X-Forwarded-For. ACHTUNG: Nur einschalten, wenn der Server NUR über den
+    # Proxy erreichbar ist. Sonst kann ein Angreifer den Header selbst setzen und so
+    # die IP-basierte Login-Sperre umgehen (unbegrenztes Passwort-Raten).
     TRUST_PROXY = _bool("TRUST_PROXY", False)
+
+    # Anzahl der vertrauenswürdigen Proxys VOR der App. Wichtig gegen gefälschte
+    # X-Forwarded-For-Header: es wird nur der n-t-letzte Eintrag als echte IP genommen.
+    #   nur nginx            -> 1
+    #   Cloudflare -> nginx  -> 2
+    PROXY_HOPS = int(os.environ.get("PROXY_HOPS", "1"))
+
+    # Hinter Cloudflare: die echte Client-IP steht im Header CF-Connecting-IP, den
+    # Cloudflare bei jeder Anfrage selbst überschreibt (nicht fälschbar, solange der
+    # Server nur Cloudflare-IPs annimmt). Dann zählt die Login-Sperre pro echtem Nutzer.
+    TRUST_CF_CONNECTING_IP = _bool("TRUST_CF_CONNECTING_IP", False)
 
     # Maximale Größe einer Anfrage (16 KB reichen für Login/Registrierung locker).
     MAX_CONTENT_LENGTH = 16 * 1024

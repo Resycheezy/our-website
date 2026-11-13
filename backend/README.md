@@ -131,6 +131,30 @@ Ohne Limit könnte ein Angreifer automatisiert tausende Passwörter pro Minute a
 (**Brute Force**). Flask-Limiter erlaubt pro IP-Adresse nur **5 Fehlversuche pro Minute** und
 **20 pro Stunde**, danach kommt `429 Too Many Requests`. Erfolgreiche Logins zählen nicht mit.
 
+**Wichtig hinter einem Proxy:** Die Sperre zählt pro IP. Darum muss die App die *echte*
+Client-IP kennen, nicht die des Proxys – und ein Angreifer darf die IP nicht fälschen können.
+- `TRUST_PROXY=true` nur setzen, wenn der Server **ausschließlich** über den Proxy erreichbar
+  ist (Firewall). Sonst kann jemand den Header `X-Forwarded-For` selbst schicken und mit einer
+  neuen „IP“ pro Versuch die Sperre umgehen.
+- `PROXY_HOPS` = Anzahl der Proxys davor (nur nginx = 1, Cloudflare→nginx = 2). So wird nur der
+  vertrauenswürdige Teil von `X-Forwarded-For` ausgewertet.
+- Hinter Cloudflare zusätzlich `TRUST_CF_CONNECTING_IP=true`: dann zählt die Sperre nach dem
+  Header `CF-Connecting-IP`, den Cloudflare selbst setzt und der nicht fälschbar ist.
+
+### Schutz-Header (Security Headers)
+
+Jede Antwort der API trägt `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`
+(kein Einbetten in fremde Seiten → kein Clickjacking), `Referrer-Policy: no-referrer` und eine
+strenge `Content-Security-Policy`. Über echtes HTTPS kommt zusätzlich `Strict-Transport-Security`
+(HSTS). Die statischen Frontend-Seiten bekommen ihre Header in `nginx.conf`; die CSP dort erlaubt
+nur eigene Dateien, keine fremden Skripte oder CDNs.
+
+### Debug-Modus aus
+
+Der Flask-Debug-Modus zeigt bei Fehlern interne Details und bietet eine Code-Konsole – er darf
+nie öffentlich laufen. Deshalb ist er standardmäßig **aus** und lässt sich nur lokal über
+`FLASK_DEBUG=true` einschalten. Im Produktivbetrieb läuft die App ohnehin über gunicorn.
+
 ### CORS
 
 Browser verbieten JavaScript standardmäßig, Anfragen an eine andere Adresse zu schicken.
@@ -171,5 +195,9 @@ landet also nie auf GitHub. `.env.example` zeigt, welche Werte nötig sind, ohne
 ## Für echten Betrieb noch nötig
 
 - HTTPS (z. B. mit Let's Encrypt) und `SESSION_COOKIE_SECURE=true`
+- `FLASK_DEBUG` nicht setzen (Standard aus); App über gunicorn starten, nie `python wsgi.py`
+- Server so absichern, dass er nur über den Proxy erreichbar ist (Firewall). Hinter Cloudflare:
+  nur Cloudflare-IPs zulassen und `TRUST_CF_CONNECTING_IP=true` setzen (siehe Rate-Limiting)
+- HSTS-Zeile in `nginx.conf` aktivieren, sobald die Seite dauerhaft über HTTPS läuft
 - Zeile `add_header X-Served-By ...` aus `nginx.conf` entfernen
 - Regelmäßige Backups der PostgreSQL-Datenbank

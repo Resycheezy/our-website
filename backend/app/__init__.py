@@ -5,7 +5,7 @@ create_app() erstellt jedes Mal eine neue, fertig konfigurierte App.
 Das ist praktisch für Tests: jeder Test bekommt seine eigene App mit eigener Test-DB.
 """
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFError
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -28,8 +28,11 @@ def create_app(overrides=None):
 
     # Hinter nginx kommt jede Anfrage scheinbar von nginx. ProxyFix liest stattdessen
     # die echte Client-IP aus X-Forwarded-For (wichtig fürs Rate-Limiting pro IP).
+    # x_for = Anzahl vertrauenswürdiger Proxys: nur der n-t-letzte XFF-Eintrag gilt,
+    # ältere (vom Client gefälschte) Einträge werden ignoriert.
     if app.config["TRUST_PROXY"]:
-        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+        hops = app.config["PROXY_HOPS"]
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=hops, x_proto=hops, x_host=hops)
 
     # CORS: Nur die in CORS_ORIGINS eingetragenen Frontends dürfen per JavaScript
     # auf /api/... zugreifen. supports_credentials=True erlaubt das Mitsenden von Cookies.
@@ -47,8 +50,35 @@ def create_app(overrides=None):
     app.register_blueprint(api)
     app.register_blueprint(health_bp)
 
+    _register_security_headers(app)
     _register_error_handlers(app)
     return app
+
+
+def _register_security_headers(app):
+    """
+    Setzt bei JEDER Antwort schützende HTTP-Header. Die API liefert nur JSON,
+    deshalb ist die Content-Security-Policy ganz streng (default-src 'none').
+    Die statischen Frontend-Seiten liefert nginx aus und bekommt dort eigene Header.
+    """
+
+    @app.after_request
+    def set_security_headers(response):
+        # Browser soll den Content-Type nicht "erraten" (verhindert MIME-Tricks)
+        response.headers.setdefault("X-Content-Type-Options", "nosniff")
+        # Seite darf nicht in einen fremden <iframe> eingebettet werden (Clickjacking)
+        response.headers.setdefault("X-Frame-Options", "DENY")
+        # Keine Referrer-Daten an andere Seiten weitergeben
+        response.headers.setdefault("Referrer-Policy", "no-referrer")
+        # JSON-Antwort braucht keinerlei aktive Inhalte
+        response.headers.setdefault("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+        # HSTS nur über echtes HTTPS senden (sonst sperrt man sich lokal über http aus).
+        # request.is_secure berücksichtigt X-Forwarded-Proto, wenn ProxyFix aktiv ist.
+        if request.is_secure:
+            response.headers.setdefault(
+                "Strict-Transport-Security", "max-age=31536000; includeSubDomains"
+            )
+        return response
 
 
 def _register_error_handlers(app):
