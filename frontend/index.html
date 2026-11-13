@@ -106,21 +106,23 @@
     <section class="section section--tight" aria-labelledby="zahlen-title">
       <div class="container">
         <h2 id="zahlen-title" class="eyebrow reveal">In Zahlen</h2>
-        <dl class="stats reveal">
-          <div class="stat">
-            <dt>der Menschen in Deutschland gehören keiner Religionsgemeinschaft an</dt>
-            <dd>[XX] %</dd>
-          </div>
-          <div class="stat">
-            <dt>Menschen weltweit bezeichnen sich als nicht religiös</dt>
-            <dd>[X,X] Mrd.</dd>
-          </div>
-          <div class="stat">
-            <dt>Jahre alt sind die ältesten überlieferten religionskritischen Texte</dt>
-            <dd>[XXXX]</dd>
-          </div>
-        </dl>
-        <p class="stats-source">Platzhalter – echte Werte werden mit Quelle nachgetragen. Siehe <a class="text-link" href="pages/quellen.html">Quellen</a>.</p>
+        <!-- Zahl steht im HTML vorne: so ergibt jeder Eintrag einen ganzen Satz,
+             auch beim Vorlesen, Kopieren oder ohne CSS -->
+        <ul class="stats reveal">
+          <li class="stat">
+            <span class="stat-value">47 %</span>
+            <span class="stat-label">der Menschen in Deutschland gehören keiner Religionsgemeinschaft an</span>
+          </li>
+          <li class="stat">
+            <span class="stat-value">1,9 Mrd.</span>
+            <span class="stat-label">Menschen weltweit gehören keiner Religion an</span>
+          </li>
+          <li class="stat">
+            <span class="stat-value">2.500</span>
+            <span class="stat-label">Jahre alt sind ungefähr die ältesten überlieferten religionskritischen Texte, z. B. von Xenophanes</span>
+          </li>
+        </ul>
+        <p class="stats-source">Deutschland: Stand Ende 2024, fowid. Weltweit: Stand 2020, Pew Research Center. Details unter <a class="text-link" href="pages/quellen.html">Quellen</a>.</p>
       </div>
     </section>
 
@@ -143,8 +145,8 @@
     <div class="container footer-grid">
       <div class="footer-about">
         <a class="brand" href="index.html">Atheismus<span> verstehen</span></a>
-        <p>Ein Schulprojekt im Fach [Fach] an der [Name der Schule], [Schuljahr].</p>
-        <p class="footer-small">Von [Name 1], [Name 2], [Name 3] und [Name 4]</p>
+        <p>Ein Schulprojekt im Fach Religion an der Privatschule Mentor, Schuljahr 2026/27.</p>
+        <p class="footer-small">Von Leandro und Ruben</p>
       </div>
 
       <nav aria-label="Themen">
@@ -177,7 +179,7 @@
     </div>
 
     <div class="container footer-bottom">
-      <p>© 2026 [Namen] · Nicht-kommerzielles Schulprojekt</p>
+      <p>© 2026 Leandro und Ruben · Nicht-kommerzielles Schulprojekt</p>
       <p>Kein Tracking · Nur technisch notwendige Cookies</p>
     </div>
   </footer>

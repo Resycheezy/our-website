@@ -566,12 +566,13 @@ code {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
   margin: 0;
-  padding-top: var(--space-6);
+  padding: var(--space-6) 0 0;
+  list-style: none;
   border-top: 1px solid var(--color-line);
 }
 
-.stat dd {
-  margin: 0;
+.stat-value {
+  display: block;
   font-size: clamp(2.75rem, 1.5rem + 4vw, 5rem);
   white-space: nowrap;
   font-weight: 500;
@@ -579,17 +580,11 @@ code {
   line-height: 1;
 }
 
-.stat dt {
+.stat-label {
+  display: block;
   margin-top: var(--space-3);
   color: var(--color-muted);
   max-width: 28ch;
-}
-
-/* dt soll unter der Zahl stehen, im HTML steht es aber (korrekt) davor */
-.stat {
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
 }
 
 .stats-source {
@@ -844,6 +839,7 @@ tbody th {
 
 .source-list li {
   margin-bottom: var(--space-4);
+  overflow-wrap: anywhere; /* lange URLs umbrechen statt seitlich überstehen */
 }
 
 .tag {

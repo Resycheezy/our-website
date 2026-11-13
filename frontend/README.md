@@ -50,8 +50,7 @@ unter `http://localhost:8080` gemeinsam aus.
 | Was | Wo |
 |---|---|
 | Namen, Schule, Fach, Schuljahr | Footer in allen Seiten, `impressum.html` |
-| Echte Zahlen + Quelle | `index.html` (Abschnitt „In Zahlen“) und `quellen.html` |
-| Inhaltstexte | `geschichte.html`, `positionen.html` (Stichpunkte mit `[Ergänzen]`) |
+| Zahlen aktualisieren (Stand: Ende 2024 bzw. 2020) | `index.html` („In Zahlen“), `geschichte.html` und die Quelle in `quellen.html` |
 | Platzhalter in den Rechtstexten | alle `[eckigen Klammern]` in impressum/datenschutz/nutzungsbedingungen/cookies |
 | Farben, Schrift, Abstände | `css/style.css`, Abschnitt 2 (`:root`) |
 
