@@ -15,7 +15,7 @@ frontend/
 │   ├── login.html          Login-Formular
 │   ├── register.html       Registrierung (mit Pflicht-Checkbox)
 │   ├── konto.html          Profil, Daten-Export, Konto löschen (nur eingeloggt)
-│   ├── datenschutz.html    ┐ Rechtstexte (ENTWURF, Platzhalter in [eckigen Klammern])
+│   ├── datenschutz.html    ┐ Rechtstexte
 │   ├── nutzungsbedingungen.html │
 │   └── cookies.html        ┘
 ├── css/style.css           Gesamtes Design; alle Farben/Abstände als Variablen in :root
@@ -50,7 +50,6 @@ unter `http://localhost:8080` gemeinsam aus.
 |---|---|
 | Namen, Schule, Fach, Schuljahr | Footer in allen Seiten |
 | Zahlen aktualisieren (Stand: Ende 2024 bzw. 2020) | `index.html` („In Zahlen“), `geschichte.html` und die Quelle in `quellen.html` |
-| Platzhalter in den Rechtstexten | alle `[eckigen Klammern]` in datenschutz/nutzungsbedingungen/cookies |
 | Farben, Schrift, Abstände | `css/style.css`, Abschnitt 2 (`:root`) |
 
 ## Barrierefreiheit
@@ -72,7 +71,6 @@ unter `http://localhost:8080` gemeinsam aus.
 ## Vor der Veröffentlichung
 
 - [ ] Rechtstexte von einer fachkundigen Person prüfen lassen (Hinweis oben auf den Seiten danach entfernen)
-- [ ] Alle `[Platzhalter]` ersetzen
 - [ ] Server-Logs wirklich nach der in der Datenschutzerklärung genannten Frist löschen
       (Docker speichert Logs standardmäßig unbegrenzt → Log-Rotation einrichten)
 - [ ] HTTPS einrichten und im Backend `SESSION_COOKIE_SECURE=true` setzen
