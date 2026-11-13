@@ -15,8 +15,7 @@ frontend/
 │   ├── login.html          Login-Formular
 │   ├── register.html       Registrierung (mit Pflicht-Checkbox)
 │   ├── konto.html          Profil, Daten-Export, Konto löschen (nur eingeloggt)
-│   ├── impressum.html      ┐
-│   ├── datenschutz.html    │ Rechtstexte (ENTWURF, Platzhalter in [eckigen Klammern])
+│   ├── datenschutz.html    ┐ Rechtstexte (ENTWURF, Platzhalter in [eckigen Klammern])
 │   ├── nutzungsbedingungen.html │
 │   └── cookies.html        ┘
 ├── css/style.css           Gesamtes Design; alle Farben/Abstände als Variablen in :root
@@ -29,7 +28,7 @@ frontend/
 ```
 
 Header und Footer stehen in jeder HTML-Datei. Wer z. B. einen Footer-Link ändert,
-muss das in allen 11 Dateien tun (Suchen & Ersetzen in VS Code: `Strg+Umschalt+H`).
+muss das in allen 10 Dateien tun (Suchen & Ersetzen in VS Code: `Strg+Umschalt+H`).
 
 ## Lokal starten
 
@@ -49,9 +48,9 @@ unter `http://localhost:8080` gemeinsam aus.
 
 | Was | Wo |
 |---|---|
-| Namen, Schule, Fach, Schuljahr | Footer in allen Seiten, `impressum.html` |
+| Namen, Schule, Fach, Schuljahr | Footer in allen Seiten |
 | Zahlen aktualisieren (Stand: Ende 2024 bzw. 2020) | `index.html` („In Zahlen“), `geschichte.html` und die Quelle in `quellen.html` |
-| Platzhalter in den Rechtstexten | alle `[eckigen Klammern]` in impressum/datenschutz/nutzungsbedingungen/cookies |
+| Platzhalter in den Rechtstexten | alle `[eckigen Klammern]` in datenschutz/nutzungsbedingungen/cookies |
 | Farben, Schrift, Abstände | `css/style.css`, Abschnitt 2 (`:root`) |
 
 ## Barrierefreiheit
