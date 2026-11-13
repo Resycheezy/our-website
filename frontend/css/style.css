@@ -1,0 +1,1174 @@
+/* ==========================================================================
+   Atheismus verstehen – Stylesheet
+   Aufbau:
+     1. Schrift       2. Variablen (Design-System)   3. Grundlagen
+     4. Layout        5. Buttons & Links             6. Header & Navigation
+     7. Startseite    8. Unterseiten                 9. Formulare
+    10. Footer       11. Cookie-Hinweis             12. Animationen
+   ========================================================================== */
+
+
+/* 1. Schrift: Inter, lokal eingebunden (keine Google Fonts -> keine Daten an Dritte)
+   Eine "variable" Schriftdatei enthält alle Stärken von 100 (dünn) bis 900 (fett). */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/InterVariable-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap; /* Text sofort zeigen, Schrift tauscht sich ein, sobald geladen */
+}
+
+
+/* 2. Variablen: alle Farben, Abstände und Schriften an EINER Stelle.
+   Will man z. B. die Akzentfarbe ändern, reicht eine Zeile. */
+:root {
+  /* Farben */
+  --color-bg: #f4f2f1;          /* warmes Off-White */
+  --color-surface: #ffffff;     /* Karten, Formulare */
+  --color-surface-2: #ebe7e4;   /* leicht dunklere Flächen */
+  --color-text: #161514;        /* fast schwarz */
+  --color-muted: #57524e;       /* Nebentext (Kontrast > 7:1 auf --color-bg) */
+  --color-line: #d9d3ce;        /* Linien, Rahmen */
+  --color-accent: #1e6a56;      /* dezentes Tannengrün */
+  --color-accent-hover: #16503f;
+  --color-accent-soft: #dfeae5;
+  --color-error: #a8261b;
+  --color-error-soft: #fbe9e7;
+  --color-warning-soft: #fff4d6;
+  --color-warning-line: #e0b54a;
+
+  /* Schrift */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  --text-hero: clamp(2.75rem, 1.5rem + 6vw, 6.5rem);
+
+  /* Abstände (immer Vielfache von 0.25rem = 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: clamp(4rem, 3rem + 5vw, 8rem); /* Abstand zwischen großen Abschnitten */
+
+  /* Sonstiges */
+  --max-width: 1200px;
+  --radius: 14px;
+  --radius-pill: 999px;
+  --shadow: 0 1px 2px rgb(22 21 20 / 0.04), 0 8px 24px rgb(22 21 20 / 0.06);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* weiche Bewegung */
+  --header-height: 72px;
+}
+
+
+/* 3. Grundlagen ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + var(--space-4)); /* Anker nicht unter dem Header */
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 var(--space-4);
+  line-height: 1.1;
+  font-weight: 550;
+  letter-spacing: -0.03em;
+}
+
+p {
+  margin: 0 0 var(--space-4);
+}
+
+img, svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background: var(--color-surface-2);
+  border-radius: 4px;
+}
+
+.auth-wrap .page-header {
+  padding-top: 0;
+}
+
+/* Sichtbarer Fokus-Rahmen für Tastatur-Nutzer*innen */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Nur für Screenreader sichtbar */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Skip-Link: erscheint beim ersten Tab-Druck, springt direkt zum Inhalt */
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+
+/* 4. Layout ------------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.section {
+  padding-block: var(--space-9);
+}
+
+.section--tight {
+  padding-block: var(--space-8);
+}
+
+/* Kleine Überzeile über Überschriften */
+.eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+}
+
+.section-title {
+  font-size: var(--text-2xl);
+  max-width: 18ch;
+}
+
+.lead {
+  font-size: var(--text-lg);
+  color: var(--color-muted);
+  max-width: 52ch;
+}
+
+
+/* 5. Buttons & Links ----------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px; /* groß genug zum Antippen auf dem Handy */
+  padding: var(--space-3) var(--space-5);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn--primary {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.btn--primary:hover {
+  background: var(--color-accent);
+}
+
+.btn--secondary {
+  background: transparent;
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.btn--danger {
+  background: var(--color-error);
+  color: #fff;
+}
+
+.btn--danger:hover {
+  background: #861d14;
+}
+
+.btn--small {
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Textlink mit Pfeil, der sich beim Hover leicht bewegt */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 2px;
+}
+
+.arrow-link::after {
+  content: "→";
+  transition: transform 0.25s var(--ease);
+}
+
+.arrow-link:hover::after {
+  transform: translateX(4px);
+}
+
+.prose a,
+.text-link {
+  color: var(--color-accent);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover,
+.text-link:hover {
+  color: var(--color-accent-hover);
+}
+
+
+/* 6. Header & Navigation --------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgb(244 242 241 / 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease);
+}
+
+/* main.js setzt diese Klasse, sobald man scrollt -> feine Linie unter dem Header */
+.site-header.is-scrolled {
+  border-bottom-color: var(--color-line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--header-height);
+}
+
+.brand {
+  font-size: 1.125rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand span {
+  color: var(--color-accent);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-links a,
+.nav-login {
+  text-decoration: none;
+  color: var(--color-muted);
+  transition: color 0.2s var(--ease);
+}
+
+.nav-links a:hover,
+.nav-login:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--color-text);
+}
+
+.nav-links a[aria-current="page"] {
+  font-weight: 550;
+}
+
+.nav-auth,
+.nav-auth > div {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.nav-greeting {
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+/* [hidden] muss auch gegen "display: flex" gewinnen */
+[hidden] {
+  display: none !important;
+}
+
+/* Menü-Knopf: nur auf kleinen Bildschirmen sichtbar */
+.nav-toggle {
+  display: none;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--color-text);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Ohne JavaScript bleibt das Menü einfach offen (Klasse "js" setzt main.js) */
+  .js .site-nav {
+    display: none;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-5);
+    padding: var(--space-5);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .js .site-nav.is-open {
+    display: flex;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: var(--space-4);
+    font-size: var(--text-lg);
+  }
+
+  .nav-auth,
+  .nav-auth > div {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* 7. Startseite ------------------------------------------------------------ */
+
+/* Hero: ruhiger CSS-Verlauf als Hintergrund (kein Bild nötig) */
+.hero {
+  position: relative;
+  isolation: isolate; /* der Hintergrund (z-index: -1) bleibt innerhalb des Hero */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: calc(92vh - var(--header-height));
+  padding-block: var(--space-8);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 70% at 85% 20%, rgb(30 106 86 / 0.16), transparent 70%),
+    radial-gradient(50% 60% at 10% 90%, rgb(214 168 120 / 0.22), transparent 70%),
+    var(--color-bg);
+}
+
+.hero-title {
+  font-size: var(--text-hero);
+  font-weight: 550;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  max-width: 12ch;
+  margin-bottom: var(--space-5);
+}
+
+.hero-lead {
+  font-size: var(--text-xl);
+  line-height: 1.4;
+  color: var(--color-muted);
+  max-width: 34ch;
+  margin-bottom: var(--space-6);
+}
+
+/* Intro: Text links, Grafik rechts */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.intro-figure {
+  margin: 0;
+}
+
+.intro-figure img {
+  width: 100%;
+  max-width: 440px;
+  margin-inline: auto;
+}
+
+/* Drei Karten */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 4px rgb(22 21 20 / 0.05), 0 18px 40px rgb(22 21 20 / 0.1);
+}
+
+.card-number {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.card h3 {
+  font-size: var(--text-xl);
+  margin-top: var(--space-8);
+}
+
+.card p {
+  color: var(--color-muted);
+}
+
+/* Der Link in der Überschrift macht die ganze Karte klickbar */
+.card a {
+  text-decoration: none;
+}
+
+.card a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.card-more {
+  margin-top: auto; /* "Weiterlesen" sitzt immer unten in der Karte */
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* Zahlen-Zeile */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin: 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.stat dd {
+  margin: 0;
+  font-size: clamp(2.75rem, 1.5rem + 4vw, 5rem);
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.stat dt {
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+  max-width: 28ch;
+}
+
+/* dt soll unter der Zahl stehen, im HTML steht es aber (korrekt) davor */
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+.stats-source {
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+/* Abschluss-Bereich */
+.cta {
+  padding: var(--space-8) var(--space-6);
+  background: var(--color-accent-soft);
+  border-radius: calc(var(--radius) * 2);
+  text-align: center;
+}
+
+.cta .section-title,
+.cta .lead {
+  margin-inline: auto;
+}
+
+.cta .button-row {
+  justify-content: center;
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 860px) {
+  .intro-grid,
+  .cards,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-figure {
+    order: -1;
+  }
+
+  .intro-figure img {
+    max-width: 260px;
+  }
+
+  .card {
+    min-height: 0;
+  }
+}
+
+
+/* 8. Unterseiten ------------------------------------------------------------ */
+.page-header {
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.page-header h1 {
+  font-size: var(--text-2xl);
+  max-width: 20ch;
+}
+
+/* Gut lesbarer Fließtext (Rechtstexte, Quellen) */
+.prose {
+  max-width: 72ch;
+}
+
+.prose h2 {
+  font-size: var(--text-xl);
+  margin-top: var(--space-7);
+}
+
+.prose h3 {
+  font-size: var(--text-lg);
+  margin-top: var(--space-5);
+  letter-spacing: -0.01em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: var(--space-5);
+  margin: 0 0 var(--space-4);
+}
+
+.prose li {
+  margin-bottom: var(--space-2);
+}
+
+.prose address {
+  font-style: normal;
+  margin-bottom: var(--space-4);
+}
+
+/* Hinweis "Entwurf" oben auf den Rechtsseiten */
+.draft-banner {
+  margin-bottom: var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-warning-soft);
+  border: 2px solid var(--color-warning-line);
+  border-radius: var(--radius);
+}
+
+.draft-banner p {
+  margin: 0;
+}
+
+/* Hinweis "Platzhaltertext" auf den Inhaltsseiten */
+.placeholder-note {
+  display: inline-block;
+  margin-bottom: var(--space-5);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+/* Timeline (geschichte.html) */
+.timeline {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Die senkrechte Linie */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 11px;
+  width: 2px;
+  background: var(--color-line);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+/* Der Punkt auf der Linie */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.55rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid var(--color-accent);
+}
+
+.timeline-period {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.timeline-item h2 {
+  font-size: var(--text-2xl);
+}
+
+.timeline-item ul {
+  max-width: 64ch;
+  padding-left: var(--space-5);
+}
+
+.timeline-item li {
+  margin-bottom: var(--space-2);
+}
+
+/* Karten für Positionen */
+.position-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+.position-card {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.position-card h3 {
+  font-size: var(--text-xl);
+}
+
+.position-card .definition {
+  color: var(--color-muted);
+}
+
+.position-card ul {
+  padding-left: var(--space-5);
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .position-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tabellen (Vergleich, Cookies). Auf dem Handy seitlich scrollbar. */
+.table-wrap {
+  overflow-x: auto;
+  margin-block: var(--space-5);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+caption {
+  padding: var(--space-4) var(--space-5) 0;
+  text-align: left;
+  font-weight: 550;
+}
+
+th,
+td {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-line);
+}
+
+thead th {
+  font-weight: 600;
+  background: var(--color-surface-2);
+}
+
+tbody tr:last-child th,
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody th {
+  font-weight: 550;
+}
+
+/* Quellenliste */
+.source-list {
+  padding-left: var(--space-5);
+}
+
+.source-list li {
+  margin-bottom: var(--space-4);
+}
+
+.tag {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-warning-soft);
+  font-size: 0.75rem;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+
+/* 9. Formulare --------------------------------------------------------------- */
+.auth-wrap {
+  max-width: 540px;
+  margin-inline: auto;
+  padding-block: var(--space-8);
+}
+
+.panel {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.panel + .panel {
+  margin-top: var(--space-5);
+}
+
+.panel h2 {
+  font-size: var(--text-xl);
+}
+
+.field {
+  margin-bottom: var(--space-5);
+}
+
+.field label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+}
+
+.field-hint {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="password"] {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--color-line);
+  border-radius: 10px;
+  background: var(--color-bg);
+  font: inherit;
+  color: var(--color-text);
+  transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+
+.field input:hover {
+  border-color: var(--color-muted);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.field-error {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.checkbox {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.checkbox input {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+}
+
+.checkbox label {
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Meldung oben im Formular (Fehler oder Erfolg) */
+.form-alert {
+  margin-bottom: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 10px;
+  background: var(--color-error-soft);
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+.form-alert--success {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-hover);
+}
+
+.form-alert:empty {
+  display: none;
+}
+
+.form-footer {
+  margin-top: var(--space-5);
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Kontodaten */
+.account-data {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-3) var(--space-5);
+  margin: 0;
+}
+
+.account-data dt {
+  color: var(--color-muted);
+}
+
+.account-data dd {
+  margin: 0;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.panel--danger {
+  border: 1.5px solid var(--color-error-soft);
+}
+
+
+/* 10. Footer ----------------------------------------------------------------- */
+.site-footer {
+  margin-top: var(--space-9);
+  padding-block: var(--space-8) var(--space-5);
+  background: var(--color-text);
+  color: #d9d4cf;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.site-footer .brand {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--color-bg);
+}
+
+.site-footer .brand span {
+  color: #8fc9b6;
+}
+
+.site-footer h2 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-bg);
+}
+
+.site-footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer li {
+  margin-bottom: var(--space-2);
+}
+
+.site-footer a {
+  color: #d9d4cf;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.site-footer :focus-visible {
+  outline-color: #8fc9b6;
+}
+
+.footer-small {
+  font-size: var(--text-sm);
+  color: #aaa39d;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid #34312f;
+  font-size: var(--text-sm);
+  color: #aaa39d;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-about {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* 11. Cookie-Hinweis ---------------------------------------------------------- */
+.cookie-notice {
+  position: fixed;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: min(420px, calc(100vw - 2 * var(--space-4)));
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5);
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.2);
+  font-size: var(--text-sm);
+}
+
+.cookie-notice p {
+  margin: 0;
+}
+
+.cookie-notice a {
+  color: #8fc9b6;
+}
+
+.cookie-notice button {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #34312f;
+  color: var(--color-bg);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cookie-notice button:hover {
+  background: #4a4643;
+}
+
+
+/* 12. Animationen ------------------------------------------------------------ */
+
+/* Sanftes Einblenden beim Scrollen. main.js gibt Elementen mit .reveal die Klasse
+   .is-visible, sobald sie ins Bild kommen. Ohne JavaScript ist alles sofort sichtbar. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Wer in den Systemeinstellungen "Bewegung reduzieren" aktiviert hat,
+   bekommt keine Animationen. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positionen – Atheismus verstehen</title>
+  <meta name="description" content="Atheismus, Agnostizismus und Humanismus im Vergleich zu religiösen Weltanschauungen.">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/InterVariable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">Atheismus<span> verstehen</span></a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menü</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+        <ul class="nav-links">
+            <li><a href="../pages/geschichte.html">Geschichte</a></li>
+            <li><a href="../pages/positionen.html" aria-current="page">Positionen</a></li>
+            <li><a href="../pages/quellen.html">Quellen</a></li>
+        </ul>
+
+        <div class="nav-auth">
+          <!-- Sichtbar, wenn NICHT eingeloggt -->
+          <div data-auth="guest">
+            <a class="nav-login" href="../pages/login.html">Login</a>
+            <a class="btn btn--primary btn--small" href="../pages/register.html">Registrieren</a>
+          </div>
+          <!-- Sichtbar, wenn eingeloggt (main.js schaltet um) -->
+          <div data-auth="user" hidden>
+            <span class="nav-greeting">Hallo, <strong data-username></strong></span>
+            <a class="nav-login" href="../pages/konto.html">Mein Konto</a>
+            <button class="btn btn--secondary btn--small" type="button" data-logout>Logout</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <header class="page-header">
+        <p class="eyebrow">Positionen</p>
+        <h1>Weltanschauungen im Vergleich</h1>
+        <p class="lead">Atheismus, Agnostizismus und Humanismus und wie sie sich zu religiösen Sichtweisen verhalten. Wir wollen erklären, nicht bewerten.</p>
+        <p class="placeholder-note">Platzhaltertext – wird noch überarbeitet und mit Quellen belegt</p>
+      </header>
+
+      <section class="section--tight" aria-labelledby="ueberblick-title">
+        <h2 id="ueberblick-title" class="visually-hidden">Die Positionen im Überblick</h2>
+        <div class="position-grid">
+          <article class="position-card reveal">
+            <h3>Religiöse Weltanschauungen</h3>
+            <p class="definition">Glaube an einen Gott (Monotheismus) oder an mehrere Götter (Polytheismus).</p>
+            <ul>
+              <li>Beispiele: Judentum, Christentum, Islam; Hinduismus mit vielen Gottheiten</li>
+              <li>Glaube stützt sich auf heilige Schriften, Tradition, Gemeinschaft und persönliche Erfahrung</li>
+              <li>Nicht jede Religion kennt einen Schöpfergott, z. B. viele Richtungen des Buddhismus</li>
+              <li>[Ergänzen]</li>
+            </ul>
+          </article>
+          <article class="position-card reveal">
+            <h3>Atheismus</h3>
+            <p class="definition">Von griechisch „a-theos“: ohne Gott. Kein Glaube an einen Gott oder an Götter.</p>
+            <ul>
+              <li>Schwacher Atheismus: Man glaubt nicht an Gott.</li>
+              <li>Starker Atheismus: Man ist überzeugt, dass es keinen Gott gibt.</li>
+              <li>Häufige Begründungen: fehlende Belege, die Frage nach dem Leid in der Welt (Theodizee), naturwissenschaftliche Erklärungen</li>
+              <li>Keine gemeinsame Lehre, Organisation oder Schrift</li>
+            </ul>
+          </article>
+          <article class="position-card reveal">
+            <h3>Agnostizismus</h3>
+            <p class="definition">Von griechisch „a-gnosis“: ohne Wissen. Ob es einen Gott gibt, lässt sich nicht wissen.</p>
+            <ul>
+              <li>Begriff geprägt von Thomas Henry Huxley (1869)</li>
+              <li>Es geht um Wissen, nicht um Glauben: Es gibt agnostische Gläubige und agnostische Atheist*innen.</li>
+              <li>Betont Offenheit und Zurückhaltung bei letzten Fragen</li>
+              <li>[Ergänzen]</li>
+            </ul>
+          </article>
+          <article class="position-card reveal">
+            <h3>Humanismus</h3>
+            <p class="definition">Der Mensch, seine Würde und seine Vernunft stehen im Mittelpunkt.</p>
+            <ul>
+              <li>Säkularer Humanismus: Ethik ohne Bezug auf Gott</li>
+              <li>Werte: Selbstbestimmung, Menschenrechte, Toleranz, Wissenschaft</li>
+              <li>Es gibt auch religiöse Humanist*innen, z. B. im christlichen Humanismus.</li>
+              <li>[Ergänzen]</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section--tight" aria-labelledby="tabelle-title">
+        <h2 id="tabelle-title" class="section-title reveal">Gegenübergestellt</h2>
+        <!-- tabindex="0": Auf dem Handy kann man die Tabelle auch per Tastatur seitlich scrollen -->
+        <div class="table-wrap reveal" role="region" aria-labelledby="tabelle-title" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Frage</th>
+                <th scope="col">Religiöse Weltanschauungen</th>
+                <th scope="col">Atheismus</th>
+                <th scope="col">Agnostizismus</th>
+                <th scope="col">Säkularer Humanismus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Gibt es einen Gott?</th>
+                <td>Ja, ein Gott oder mehrere Götter</td>
+                <td>Kein Glaube an einen Gott</td>
+                <td>Nicht beantwortbar</td>
+                <td>Für die Ethik nicht entscheidend; meist kein Gottesglaube</td>
+              </tr>
+              <tr>
+                <th scope="row">Woher kommt Erkenntnis?</th>
+                <td>Offenbarung, Schriften, Tradition, Vernunft, Erfahrung</td>
+                <td>Vernunft, Erfahrung, Wissenschaft</td>
+                <td>Vernunft und Erfahrung, mit Grenzen</td>
+                <td>Vernunft, Erfahrung, Wissenschaft</td>
+              </tr>
+              <tr>
+                <th scope="row">Woran orientiert sich Moral?</th>
+                <td>Gebote und Werte der Religion, Gewissen</td>
+                <td>Unterschiedlich, z. B. Vernunft, Mitgefühl, Gesellschaftsvertrag</td>
+                <td>Unterschiedlich</td>
+                <td>Menschenwürde, Menschenrechte, Vernunft</td>
+              </tr>
+              <tr>
+                <th scope="row">Sinn des Lebens?</th>
+                <td>Oft von Gott gegeben, Hoffnung auf ein Jenseits</td>
+                <td>Wird von Menschen selbst gefunden oder gestaltet</td>
+                <td>Offen</td>
+                <td>Selbstbestimmtes, gutes Leben im Diesseits</td>
+              </tr>
+              <tr>
+                <th scope="row">Gemeinschaft</th>
+                <td>Gemeinden, Rituale, Feste</td>
+                <td>Keine feste Form</td>
+                <td>Keine feste Form</td>
+                <td>Teilweise Verbände, z. B. [Beispiel]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section--tight prose reveal" aria-labelledby="gemeinsam-title">
+        <h2 id="gemeinsam-title">Gemeinsamkeiten</h2>
+        <ul>
+          <li>Alle Positionen fragen danach, was ein gutes Leben ausmacht.</li>
+          <li>Menschen jeder Weltanschauung setzen sich für Menschenwürde und Gerechtigkeit ein.</li>
+          <li>Das Grundgesetz schützt in Artikel 4 die Freiheit, zu glauben, und die Freiheit, nicht zu glauben.</li>
+          <li>[Ergänzen]</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="../index.html">Atheismus<span> verstehen</span></a>
+        <p>Ein Schulprojekt im Fach [Fach] an der [Name der Schule], [Schuljahr].</p>
+        <p class="footer-small">Von [Name 1], [Name 2], [Name 3] und [Name 4]</p>
+      </div>
+
+      <nav aria-label="Themen">
+        <h2>Themen</h2>
+        <ul>
+          <li><a href="../pages/geschichte.html">Geschichte</a></li>
+          <li><a href="../pages/positionen.html">Positionen</a></li>
+          <li><a href="../pages/quellen.html">Quellen</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Konto">
+        <h2>Konto</h2>
+        <ul>
+          <li><a href="../pages/login.html">Login</a></li>
+          <li><a href="../pages/register.html">Registrieren</a></li>
+          <li><a href="../pages/konto.html">Mein Konto</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Rechtliches">
+        <h2>Rechtliches</h2>
+        <ul>
+          <li><a href="../pages/impressum.html">Impressum</a></li>
+          <li><a href="../pages/datenschutz.html">Datenschutz</a></li>
+          <li><a href="../pages/nutzungsbedingungen.html">Nutzungsbedingungen</a></li>
+          <li><a href="../pages/cookies.html">Cookies</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 [Namen] · Nicht-kommerzielles Schulprojekt</p>
+      <p>Kein Tracking · Nur technisch notwendige Cookies</p>
+    </div>
+  </footer>
+
+  <!-- Kleiner Hinweis statt Cookie-Banner (main.js blendet ihn ein) -->
+  <div class="cookie-notice" role="region" aria-label="Hinweis zu Cookies" hidden>
+    <p>Wir nutzen nur technisch notwendige Cookies. <a href="../pages/cookies.html">Mehr erfahren</a></p>
+    <button type="button" data-cookie-close aria-label="Hinweis schließen">×</button>
+  </div>
+
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

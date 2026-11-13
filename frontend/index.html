@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atheismus verstehen</title>
+  <meta name="description" content="Was ist Atheismus? Ein Schulprojekt über Geschichte, Positionen und Atheismus heute.">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/InterVariable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Atheismus<span> verstehen</span></a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menü</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+        <ul class="nav-links">
+            <li><a href="pages/geschichte.html">Geschichte</a></li>
+            <li><a href="pages/positionen.html">Positionen</a></li>
+            <li><a href="pages/quellen.html">Quellen</a></li>
+        </ul>
+
+        <div class="nav-auth">
+          <!-- Sichtbar, wenn NICHT eingeloggt -->
+          <div data-auth="guest">
+            <a class="nav-login" href="pages/login.html">Login</a>
+            <a class="btn btn--primary btn--small" href="pages/register.html">Registrieren</a>
+          </div>
+          <!-- Sichtbar, wenn eingeloggt (main.js schaltet um) -->
+          <div data-auth="user" hidden>
+            <span class="nav-greeting">Hallo, <strong data-username></strong></span>
+            <a class="nav-login" href="pages/konto.html">Mein Konto</a>
+            <button class="btn btn--secondary btn--small" type="button" data-logout>Logout</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container">
+        <p class="eyebrow reveal">Ein Schulprojekt über Religion und Weltanschauungen</p>
+        <h1 id="hero-title" class="hero-title reveal">Was ist Atheismus?</h1>
+        <p class="hero-lead reveal">Geschichte, Gedanken und Positionen, sachlich erklärt und mit Respekt vor jeder Weltanschauung.</p>
+        <div class="button-row reveal">
+          <a class="btn btn--primary" href="#intro">Mehr erfahren</a>
+          <a class="btn btn--secondary" href="pages/register.html" data-auth="guest">Registrieren</a>
+          <a class="btn btn--secondary" href="pages/konto.html" data-auth="user" hidden>Mein Konto</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Intro -->
+    <section id="intro" class="section" aria-labelledby="intro-title">
+      <div class="container intro-grid">
+        <div class="reveal">
+          <p class="eyebrow">Worum es geht</p>
+          <h2 id="intro-title" class="section-title">Nicht an Gott glauben und trotzdem große Fragen stellen.</h2>
+          <p class="lead">Atheismus bezeichnet die Haltung, nicht an einen Gott oder an Götter zu glauben. Dahinter stehen ganz unterschiedliche Begründungen, Epochen und Menschen. Wir stellen sie vor und vergleichen sie mit religiösen Sichtweisen.</p>
+          <a class="arrow-link" href="pages/positionen.html">Positionen im Vergleich</a>
+        </div>
+        <figure class="intro-figure reveal">
+          <img src="img/fragen.svg" width="400" height="400"
+               alt="Drei sich überschneidende Kreise als Sinnbild für verschiedene Weltanschauungen mit einer gemeinsamen Mitte">
+        </figure>
+      </div>
+    </section>
+
+    <!-- 3. Drei Karten -->
+    <section class="section section--tight" aria-labelledby="themen-title">
+      <div class="container">
+        <p class="eyebrow reveal">Themen</p>
+        <h2 id="themen-title" class="section-title reveal">Drei Wege ins Thema</h2>
+        <div class="cards">
+          <article class="card reveal">
+            <span class="card-number">01</span>
+            <h3><a href="pages/geschichte.html">Geschichte</a></h3>
+            <p>Von antiken Philosophen über die Aufklärung bis in die Moderne.</p>
+            <span class="card-more" aria-hidden="true">Zur Zeitleiste →</span>
+          </article>
+          <article class="card reveal">
+            <span class="card-number">02</span>
+            <h3><a href="pages/positionen.html">Positionen</a></h3>
+            <p>Atheismus, Agnostizismus und Humanismus im Vergleich zu Religionen.</p>
+            <span class="card-more" aria-hidden="true">Zum Vergleich →</span>
+          </article>
+          <article class="card reveal">
+            <span class="card-number">03</span>
+            <h3><a href="pages/geschichte.html#heute">Atheismus heute</a></h3>
+            <p>Konfessionsfreie in Deutschland, Säkularisierung und aktuelle Debatten.</p>
+            <span class="card-more" aria-hidden="true">Weiterlesen →</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Zahlen (Platzhalter: echte Werte mit Quelle nachtragen!) -->
+    <section class="section section--tight" aria-labelledby="zahlen-title">
+      <div class="container">
+        <h2 id="zahlen-title" class="eyebrow reveal">In Zahlen</h2>
+        <dl class="stats reveal">
+          <div class="stat">
+            <dt>der Menschen in Deutschland gehören keiner Religionsgemeinschaft an</dt>
+            <dd>[XX] %</dd>
+          </div>
+          <div class="stat">
+            <dt>Menschen weltweit bezeichnen sich als nicht religiös</dt>
+            <dd>[X,X] Mrd.</dd>
+          </div>
+          <div class="stat">
+            <dt>Jahre alt sind die ältesten überlieferten religionskritischen Texte</dt>
+            <dd>[XXXX]</dd>
+          </div>
+        </dl>
+        <p class="stats-source">Platzhalter – echte Werte werden mit Quelle nachgetragen. Siehe <a class="text-link" href="pages/quellen.html">Quellen</a>.</p>
+      </div>
+    </section>
+
+    <!-- 5. Abschluss -->
+    <section class="section section--tight" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta reveal">
+          <h2 id="cta-title" class="section-title">Mach dir dein eigenes Bild.</h2>
+          <p class="lead">Lies dich durch Geschichte und Positionen und vergleiche sie mit dem, was du selbst denkst.</p>
+          <div class="button-row">
+            <a class="btn btn--primary" href="pages/register.html" data-auth="guest">Konto erstellen</a>
+            <a class="btn btn--primary" href="pages/geschichte.html" data-auth="user" hidden>Weiterlesen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="index.html">Atheismus<span> verstehen</span></a>
+        <p>Ein Schulprojekt im Fach [Fach] an der [Name der Schule], [Schuljahr].</p>
+        <p class="footer-small">Von [Name 1], [Name 2], [Name 3] und [Name 4]</p>
+      </div>
+
+      <nav aria-label="Themen">
+        <h2>Themen</h2>
+        <ul>
+          <li><a href="pages/geschichte.html">Geschichte</a></li>
+          <li><a href="pages/positionen.html">Positionen</a></li>
+          <li><a href="pages/quellen.html">Quellen</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Konto">
+        <h2>Konto</h2>
+        <ul>
+          <li><a href="pages/login.html">Login</a></li>
+          <li><a href="pages/register.html">Registrieren</a></li>
+          <li><a href="pages/konto.html">Mein Konto</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Rechtliches">
+        <h2>Rechtliches</h2>
+        <ul>
+          <li><a href="pages/impressum.html">Impressum</a></li>
+          <li><a href="pages/datenschutz.html">Datenschutz</a></li>
+          <li><a href="pages/nutzungsbedingungen.html">Nutzungsbedingungen</a></li>
+          <li><a href="pages/cookies.html">Cookies</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 [Namen] · Nicht-kommerzielles Schulprojekt</p>
+      <p>Kein Tracking · Nur technisch notwendige Cookies</p>
+    </div>
+  </footer>
+
+  <!-- Kleiner Hinweis statt Cookie-Banner (main.js blendet ihn ein) -->
+  <div class="cookie-notice" role="region" aria-label="Hinweis zu Cookies" hidden>
+    <p>Wir nutzen nur technisch notwendige Cookies. <a href="pages/cookies.html">Mehr erfahren</a></p>
+    <button type="button" data-cookie-close aria-label="Hinweis schließen">×</button>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

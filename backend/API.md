@@ -201,6 +201,60 @@ ob „Login“ oder „Hallo, Max“ angezeigt werden soll.
 
 ---
 
+## `GET /api/account/export`
+
+„Meine Daten herunterladen“. Nur eingeloggt. Antwort hat den Header
+`Content-Disposition: attachment; filename="meine-daten.json"`.
+
+**Antwort `200`**
+```json
+{
+  "exported_at": "2026-11-13T14:02:11",
+  "user": {
+    "id": 1,
+    "username": "max_mustermann",
+    "email": "max@example.com",
+    "created_at": "2026-11-13T12:18:59",
+    "last_login": "2026-11-13T12:25:03"
+  },
+  "hinweis": "Das Passwort wird nur als Hash gespeichert und deshalb nicht exportiert."
+}
+```
+**Antwort `401`**, wenn nicht eingeloggt.
+
+---
+
+## `DELETE /api/account`
+
+Löscht das eigene Konto **endgültig**. Nur eingeloggt, braucht den CSRF-Header
+und das Passwort zur Bestätigung. Danach ist man ausgeloggt.
+
+**Request**
+```json
+{ "password": "sicheres-passwort" }
+```
+
+**Antwort `200`**
+```json
+{ "message": "Konto gelöscht" }
+```
+
+**Fehler**
+
+`400` Passwort fehlt:
+```json
+{ "error": "Ungültige Eingabe", "fields": { "password": "Passwort zur Bestätigung angeben" } }
+```
+
+`403` Passwort falsch (man bleibt eingeloggt):
+```json
+{ "error": "Passwort ist falsch", "fields": { "password": "Passwort ist falsch" } }
+```
+
+`401` nicht eingeloggt, `429` zu viele Fehlversuche (gleiches Limit wie beim Login).
+
+---
+
 ## `GET /health`
 
 Für den Load Balancer / Docker. Fürs Frontend normalerweise nicht nötig.
@@ -221,6 +275,7 @@ Für den Load Balancer / Docker. Fürs Frontend normalerweise nicht nötig.
 | 201 | Konto angelegt |
 | 400 | Eingabe ungültig, kein JSON oder CSRF-Token fehlt |
 | 401 | Nicht eingeloggt / Login falsch |
+| 403 | Bestätigungs-Passwort beim Konto löschen falsch |
 | 404 | Route gibt es nicht |
 | 409 | Benutzername/E-Mail schon vergeben |
 | 413 | Anfrage zu groß (> 16 KB) |

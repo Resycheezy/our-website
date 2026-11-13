@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookies – Atheismus verstehen</title>
+  <meta name="description" content="Welche Cookies und lokalen Speichereinträge Atheismus verstehen verwendet.">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/InterVariable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">Atheismus<span> verstehen</span></a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menü</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+        <ul class="nav-links">
+            <li><a href="../pages/geschichte.html">Geschichte</a></li>
+            <li><a href="../pages/positionen.html">Positionen</a></li>
+            <li><a href="../pages/quellen.html">Quellen</a></li>
+        </ul>
+
+        <div class="nav-auth">
+          <!-- Sichtbar, wenn NICHT eingeloggt -->
+          <div data-auth="guest">
+            <a class="nav-login" href="../pages/login.html">Login</a>
+            <a class="btn btn--primary btn--small" href="../pages/register.html">Registrieren</a>
+          </div>
+          <!-- Sichtbar, wenn eingeloggt (main.js schaltet um) -->
+          <div data-auth="user" hidden>
+            <span class="nav-greeting">Hallo, <strong data-username></strong></span>
+            <a class="nav-login" href="../pages/konto.html">Mein Konto</a>
+            <button class="btn btn--secondary btn--small" type="button" data-logout>Logout</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <header class="page-header">
+        <p class="eyebrow">Rechtliches</p>
+        <h1>Cookies</h1>
+      </header>
+      <div class="draft-banner" role="note">
+        <p><strong>Entwurf – vor Veröffentlichung rechtlich prüfen.</strong>
+        Alle Angaben in [eckigen Klammern] sind Platzhalter und müssen ersetzt werden.</p>
+      </div>
+      <div class="prose">
+
+        <p>Wir verwenden <strong>ausschließlich technisch notwendige</strong> Cookies und Speichereinträge. Es gibt keine Analyse-, Marketing- oder Tracking-Cookies und keine Cookies von Drittanbietern. Deshalb fragen wir auch nicht nach einer Einwilligung (§ 25 Abs. 2 Nr. 2 TDDDG), sondern zeigen nur einen kurzen Hinweis an.</p>
+
+        <h2>Cookies</h2>
+      </div>
+      <div class="table-wrap" role="region" aria-labelledby="cookie-table-caption" tabindex="0">
+        <table>
+          <caption id="cookie-table-caption">Cookies dieser Website</caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Zweck</th>
+              <th scope="col">Laufzeit</th>
+              <th scope="col">Anbieter</th>
+              <th scope="col">Notwendig</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><code>session</code></th>
+              <td>Hält dich nach dem Login eingeloggt (enthält deine interne Benutzer-ID) und schützt Formulare vor gefälschten Anfragen (enthält einen CSRF-Sicherheitstoken). Signiert, nicht von JavaScript lesbar (HttpOnly), wird nicht an fremde Seiten gesendet (SameSite=Lax), bei HTTPS nur verschlüsselt übertragen (Secure). Wird erst beim Registrieren oder Anmelden gesetzt.</td>
+              <td>Bis zum Schließen des Browsers. Nach dem Login 7 Tage; die Frist beginnt bei jedem Seitenaufruf neu. Beim Logout wird die Benutzer-ID entfernt.</td>
+              <td>Diese Website</td>
+              <td>Ja</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose">
+        <h2>Lokaler Speicher (localStorage)</h2>
+        <p>Dieser Eintrag wird nur in deinem Browser gespeichert und nie an unseren Server übertragen.</p>
+      </div>
+      <div class="table-wrap" role="region" aria-labelledby="storage-table-caption" tabindex="0">
+        <table>
+          <caption id="storage-table-caption">Einträge im lokalen Speicher</caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Zweck</th>
+              <th scope="col">Laufzeit</th>
+              <th scope="col">Anbieter</th>
+              <th scope="col">Notwendig</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><code>cookie-hinweis-geschlossen</code></th>
+              <td>Merkt sich, dass du den Cookie-Hinweis geschlossen hast (Wert „1“), damit er nicht bei jedem Seitenaufruf erneut erscheint.</td>
+              <td>Bis du die Websitedaten in deinem Browser löschst</td>
+              <td>Diese Website</td>
+              <td>Ja</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose">
+        <h2>Cookies löschen oder blockieren</h2>
+        <p>Du kannst Cookies und lokale Speichereinträge jederzeit in den Einstellungen deines Browsers einsehen und löschen. Wenn du das Cookie <code>session</code> blockierst, kannst du dich nicht anmelden. Alle Inhalte der Website bleiben aber lesbar.</p>
+        <p>Weitere Informationen zur Verarbeitung deiner Daten findest du in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+        <p>Stand: [Monat Jahr]</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="../index.html">Atheismus<span> verstehen</span></a>
+        <p>Ein Schulprojekt im Fach [Fach] an der [Name der Schule], [Schuljahr].</p>
+        <p class="footer-small">Von [Name 1], [Name 2], [Name 3] und [Name 4]</p>
+      </div>
+
+      <nav aria-label="Themen">
+        <h2>Themen</h2>
+        <ul>
+          <li><a href="../pages/geschichte.html">Geschichte</a></li>
+          <li><a href="../pages/positionen.html">Positionen</a></li>
+          <li><a href="../pages/quellen.html">Quellen</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Konto">
+        <h2>Konto</h2>
+        <ul>
+          <li><a href="../pages/login.html">Login</a></li>
+          <li><a href="../pages/register.html">Registrieren</a></li>
+          <li><a href="../pages/konto.html">Mein Konto</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Rechtliches">
+        <h2>Rechtliches</h2>
+        <ul>
+          <li><a href="../pages/impressum.html">Impressum</a></li>
+          <li><a href="../pages/datenschutz.html">Datenschutz</a></li>
+          <li><a href="../pages/nutzungsbedingungen.html">Nutzungsbedingungen</a></li>
+          <li><a href="../pages/cookies.html">Cookies</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 [Namen] · Nicht-kommerzielles Schulprojekt</p>
+      <p>Kein Tracking · Nur technisch notwendige Cookies</p>
+    </div>
+  </footer>
+
+  <!-- Kleiner Hinweis statt Cookie-Banner (main.js blendet ihn ein) -->
+  <div class="cookie-notice" role="region" aria-label="Hinweis zu Cookies" hidden>
+    <p>Wir nutzen nur technisch notwendige Cookies. <a href="../pages/cookies.html">Mehr erfahren</a></p>
+    <button type="button" data-cookie-close aria-label="Hinweis schließen">×</button>
+  </div>
+
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

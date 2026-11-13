@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quellen – Atheismus verstehen</title>
+  <meta name="description" content="Quellenverzeichnis des Schulprojekts Atheismus verstehen.">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/InterVariable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">Atheismus<span> verstehen</span></a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menü</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+        <ul class="nav-links">
+            <li><a href="../pages/geschichte.html">Geschichte</a></li>
+            <li><a href="../pages/positionen.html">Positionen</a></li>
+            <li><a href="../pages/quellen.html" aria-current="page">Quellen</a></li>
+        </ul>
+
+        <div class="nav-auth">
+          <!-- Sichtbar, wenn NICHT eingeloggt -->
+          <div data-auth="guest">
+            <a class="nav-login" href="../pages/login.html">Login</a>
+            <a class="btn btn--primary btn--small" href="../pages/register.html">Registrieren</a>
+          </div>
+          <!-- Sichtbar, wenn eingeloggt (main.js schaltet um) -->
+          <div data-auth="user" hidden>
+            <span class="nav-greeting">Hallo, <strong data-username></strong></span>
+            <a class="nav-login" href="../pages/konto.html">Mein Konto</a>
+            <button class="btn btn--secondary btn--small" type="button" data-logout>Logout</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <header class="page-header">
+        <p class="eyebrow">Quellen</p>
+        <h1>Quellenverzeichnis</h1>
+        <p class="lead">Woher unsere Informationen stammen. Alle Zahlen und Zitate auf dieser Website sollen hier belegt sein.</p>
+        <p class="placeholder-note">Vorschläge und Platzhalter – vor der Veröffentlichung prüfen und ergänzen</p>
+      </header>
+
+      <div class="prose">
+        <p>Format für Bücher: Nachname, Vorname (Jahr): Titel. Ort: Verlag.<br>
+        Format für Internetquellen: Herausgeber (Jahr): Titel. URL (abgerufen am TT.MM.JJJJ).</p>
+
+        <h2>Bücher und Originaltexte</h2>
+        <ol class="source-list">
+          <li>d’Holbach, Paul Henri Thiry (1770): Système de la nature. <span class="tag">Vorschlag</span></li>
+          <li>Feuerbach, Ludwig (1841): Das Wesen des Christentums. Leipzig: Otto Wigand. <span class="tag">Vorschlag</span></li>
+          <li>Russell, Bertrand (1927): Why I Am Not a Christian (Vortrag). <span class="tag">Vorschlag</span></li>
+          <li>[Nachname, Vorname (Jahr): Titel. Ort: Verlag.]</li>
+          <li>[Nachname, Vorname (Jahr): Titel. Ort: Verlag.]</li>
+        </ol>
+
+        <h2>Internetquellen</h2>
+        <ol class="source-list">
+          <li>Bundeszentrale für politische Bildung (bpb): Artikel zu Religion und Weltanschauung. [genaue URL, abgerufen am …] <span class="tag">Vorschlag</span></li>
+          <li>[Herausgeber (Jahr): Titel. URL (abgerufen am TT.MM.JJJJ).]</li>
+          <li>[Herausgeber (Jahr): Titel. URL (abgerufen am TT.MM.JJJJ).]</li>
+        </ol>
+
+        <h2>Statistiken (für die Zahlen auf der Startseite)</h2>
+        <ol class="source-list">
+          <li>Forschungsgruppe Weltanschauungen in Deutschland (fowid): Religionszugehörigkeit in Deutschland. [URL, Jahr] <span class="tag">Vorschlag</span></li>
+          <li>Statistische Ämter des Bundes und der Länder: Zensus 2022, Religionszugehörigkeit. [URL] <span class="tag">Vorschlag</span></li>
+          <li>Pew Research Center: The Global Religious Landscape. [URL, Jahr] <span class="tag">Vorschlag</span></li>
+        </ol>
+
+        <h2>Bilder, Grafiken und Schrift</h2>
+        <ul>
+          <li>Hintergrund der Startseite: CSS-Farbverlauf, eigene Gestaltung</li>
+          <li>Grafiken im Ordner img/: eigene Gestaltung</li>
+          <li>Schriftart Inter von Rasmus Andersson, lizenziert unter der SIL Open Font License 1.1, lokal eingebunden</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="../index.html">Atheismus<span> verstehen</span></a>
+        <p>Ein Schulprojekt im Fach [Fach] an der [Name der Schule], [Schuljahr].</p>
+        <p class="footer-small">Von [Name 1], [Name 2], [Name 3] und [Name 4]</p>
+      </div>
+
+      <nav aria-label="Themen">
+        <h2>Themen</h2>
+        <ul>
+          <li><a href="../pages/geschichte.html">Geschichte</a></li>
+          <li><a href="../pages/positionen.html">Positionen</a></li>
+          <li><a href="../pages/quellen.html">Quellen</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Konto">
+        <h2>Konto</h2>
+        <ul>
+          <li><a href="../pages/login.html">Login</a></li>
+          <li><a href="../pages/register.html">Registrieren</a></li>
+          <li><a href="../pages/konto.html">Mein Konto</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Rechtliches">
+        <h2>Rechtliches</h2>
+        <ul>
+          <li><a href="../pages/impressum.html">Impressum</a></li>
+          <li><a href="../pages/datenschutz.html">Datenschutz</a></li>
+          <li><a href="../pages/nutzungsbedingungen.html">Nutzungsbedingungen</a></li>
+          <li><a href="../pages/cookies.html">Cookies</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 [Namen] · Nicht-kommerzielles Schulprojekt</p>
+      <p>Kein Tracking · Nur technisch notwendige Cookies</p>
+    </div>
+  </footer>
+
+  <!-- Kleiner Hinweis statt Cookie-Banner (main.js blendet ihn ein) -->
+  <div class="cookie-notice" role="region" aria-label="Hinweis zu Cookies" hidden>
+    <p>Wir nutzen nur technisch notwendige Cookies. <a href="../pages/cookies.html">Mehr erfahren</a></p>
+    <button type="button" data-cookie-close aria-label="Hinweis schließen">×</button>
+  </div>
+
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

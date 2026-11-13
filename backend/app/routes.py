@@ -7,6 +7,8 @@ Die Routen (URLs) der App.
   POST /api/login        -> einloggen
   POST /api/logout       -> ausloggen
   GET  /api/me           -> wer ist gerade eingeloggt?
+  GET  /api/account/export -> eigene Daten als JSON-Datei herunterladen
+  DELETE /api/account    -> eigenes Konto löschen (mit Passwort-Bestätigung)
 """
 
 from datetime import datetime
@@ -199,3 +201,53 @@ def me():
         session.pop("user_id", None)
         return jsonify(error="Nicht eingeloggt"), 401
     return jsonify(user=_user_json(user))
+
+
+@api.get("/account/export")
+@auth.login_required
+def export_account():
+    """
+    "Meine Daten herunterladen" (Recht auf Datenübertragbarkeit, Art. 20 DSGVO).
+    Liefert alle gespeicherten Daten des Kontos als JSON-Datei.
+    """
+    user = query(f"SELECT {USER_COLUMNS} FROM users WHERE id = %s", (session["user_id"],), one=True)
+    if user is None:
+        session.pop("user_id", None)
+        return jsonify(error="Nicht eingeloggt"), 401
+
+    response = jsonify(
+        exported_at=datetime.now().isoformat(timespec="seconds"),
+        user=_user_json(user),
+        hinweis="Das Passwort wird nur als Hash gespeichert und deshalb nicht exportiert.",
+    )
+    # Browser soll die Antwort als Datei speichern statt sie anzuzeigen
+    response.headers["Content-Disposition"] = 'attachment; filename="meine-daten.json"'
+    return response
+
+
+@api.delete("/account")
+@auth.login_required
+# Passwort-Raten über diese Route genauso begrenzen wie beim Login
+@limiter.limit(
+    lambda: current_app.config["LOGIN_RATE_LIMIT"],
+    deduct_when=lambda response: response.status_code == 403,
+)
+def delete_account():
+    """Löscht das eigene Konto endgültig. Zur Sicherheit muss das Passwort mitgeschickt werden."""
+    data = _json_body() or {}
+    password = data.get("password")
+    if not isinstance(password, str) or not password:
+        return _validation_error({"password": "Passwort zur Bestätigung angeben"})
+
+    user = query("SELECT password_hash FROM users WHERE id = %s", (session["user_id"],), one=True)
+    if user is None:
+        session.pop("user_id", None)
+        return jsonify(error="Nicht eingeloggt"), 401
+
+    if not auth.verify_password(user["password_hash"], password):
+        # 403 statt 401: man IST eingeloggt, nur das Bestätigungs-Passwort stimmt nicht
+        return jsonify(error="Passwort ist falsch", fields={"password": "Passwort ist falsch"}), 403
+
+    query("DELETE FROM users WHERE id = %s", (session["user_id"],), commit=True)
+    session.pop("user_id", None)
+    return jsonify(message="Konto gelöscht")

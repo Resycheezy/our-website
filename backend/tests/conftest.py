@@ -42,6 +42,9 @@ class ApiClient:
     def post(self, url, json=None):
         return self.client.post(url, json=json, headers={"X-CSRFToken": self.token})
 
+    def delete(self, url, json=None):
+        return self.client.delete(url, json=json, headers={"X-CSRFToken": self.token})
+
     def get(self, url):
         return self.client.get(url)
 
